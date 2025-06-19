@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.navigation.NavController
 import androidx.compose.ui.unit.dp
 import com.example.playlistmanager.ui.theme.PlaylistManagerTheme
@@ -33,18 +34,31 @@ fun SecondScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(12.dp))
 
         Row (horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-       }
-        Button(onClick = {showAll= true}) {
-            Text("Show all songs")
-    } 
+
+            Button(onClick = { showAll = true }) {
+                Text("Show all songs")
+            }
+            Button(onClick = { showAll = false }) {
+                Text("Show Ratings >-5")
+            }
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+
         LazyColumn {
             val indices = songList.indices.filter {
                 showAll|| ratingsList[it] >=5
             }
-            song(indices.size) {index ->
-                val i =indices[index]
-                Text("${songList[i]} ")
-
+            items(indices.size) { index ->
+                val i = indices[index]
+                Text(" ${songList[i]} (${artistList[i]}) x${ratingsList[i]}")
+                Text(" comment: ${commentsList[i]}")
+                Spacer(modifier = Modifier.height(8.dp))
             }
+            }
+        Spacer(modifier = Modifier.height(12.dp))
+        Button(onClick = {navController.navigate("main")})  {
+            Text("back to Main Screen")
+        }
         }
     }
+
