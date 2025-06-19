@@ -14,6 +14,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.playlistmanager.ui.theme.PlaylistManagerTheme
 
 //Parallel arrays
+val songList = mutableListOf<String>()
+val artistList = mutableListOf<String>()
+val ratingsList = mutableListOf<Int>()
+val commentsList = mutableListOf<String>()
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
